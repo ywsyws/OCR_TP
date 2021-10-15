@@ -7,3 +7,4 @@ black
 dask
 # dtale
 missingno
+plotly
