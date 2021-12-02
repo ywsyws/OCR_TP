@@ -4,7 +4,12 @@ matplotlib
 seaborn
 sklearn
 black
-dask
+# dask
 # dtale
-missingno
+# missingno
 plotly
+Pillow
+torch
+# tensorflow==2.6.2
+tensorflow
+keras

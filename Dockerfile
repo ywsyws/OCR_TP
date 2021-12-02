@@ -9,7 +9,11 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y python3-pip python3-dev python3 && \
     apt-get install -y sudo curl && \
     apt-get install -y git && \
-    apt-get install -y jupyter
+    apt-get install -y jupyter && \
+    apt-get install -y zlib1g-dev
+
+# Upgrade pip3 and change to pip
+RUN pip3 install --upgrade pip
 
 # Configure git account
 RUN git config --global user.name "ywsyws" && \
@@ -30,8 +34,8 @@ WORKDIR /workspace
 COPY ./requirements.txt /workspace/requirements.txt
 
 # Install al the required libraries (REPLACED BY THE LINE ABOVE IF USING VIRTUAL ENVIRONMENT)
-RUN pip3 install -r requirements.txt && \
-    pip3 install "dask[dataframe]" --upgrade
+RUN pip3 install -r requirements.txt
+# pip3 install "dask[dataframe]" --upgrade
 
 # Intall jupyter notebook extension: black formatter, table of content and nbextensions configurator
 RUN jupyter nbextension install https://github.com/drillan/jupyter-black/archive/master.zip --user && \
@@ -47,4 +51,4 @@ RUN jupyter nbextension install https://github.com/drillan/jupyter-black/archive
 COPY . .
 
 # Launch Jupyter Notebook
-CMD ["jupyter", "notebook", "--port=3000", "--NotebookApp.password=''", "--NotebookApp.token=''", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+CMD ["jupyter", "notebook", "--port=3002", "--NotebookApp.password=''", "--NotebookApp.token=''", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
